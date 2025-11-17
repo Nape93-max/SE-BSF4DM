@@ -1,0 +1,89 @@
+(* ****************************************************************** *)
+(* *****                                                        ***** *)
+(* *****  FeynRules model file: Simplified DM models            ***** *)
+(* *****                                                        ***** *)
+(* *****  Author: Benjamin Fuks                                 ***** *)
+(* *****                                                        ***** *)
+(* *****  Edited by Martin Napetschnig for SE+BSF4DM Tutorial   ***** *)
+(* *****                                                        ***** *)
+(* *****                                                        ***** *)
+(* ****************************************************************** *)
+
+(* ************************** *)
+(* *****  Information   ***** *)
+(* ************************** *)
+M$ModelName = "DMsimp_t_S3Muni";
+
+M$Information = { Authors->{"Benjamin Fuks", "Martin Napetschnig"}, Emails->{"fuks@lpthe.jussieu.fr", "martin.napetschnig@tum.de"},
+                  Institutions->{"LPTHE / Sorbonne U.", "Technical University of Munich (TUM)", "JGU Mainz"},
+                  Date->"29.10.19", Version->"1.2",
+                  URLs->"http://feynrules.irmp.ucl.ac.be/wiki/DMsimpt/"};
+
+(* ************************** *)
+(* *****  Change  log   ***** *)
+(* ************************** *)
+
+(* 2019.05.22 v1.0 - First version                       *)
+(* 2019.08.27 v1.1 - Changing a few PDG codes            *)
+(* 2019.10.29 v1.2 - Adding complex scalar and vector DM *)
+
+(* ************************** *)
+(* *** Interaction orders *** *)
+(* ************************** *)
+M$InteractionOrderLimit     = { {DMT, 2} };
+M$InteractionOrderHierarchy = { {QCD, 1}, {DMT, 2}, {QED, 2} };
+
+(* ************************** *)
+(* *****     Fields     ***** *)
+(* ************************** *)
+M$ClassesDescription = {
+  (* Dark matter *)
+  F[100] == { ClassName -> Xm, SelfConjugate -> True,
+              Mass -> {MXm, 10.}, Width -> 0, PDG -> 52,
+              ParticleName -> {"~Xm"}
+              },
+
+  (* Mediators *)
+  S[203] == { ClassName -> YS3u, SelfConjugate -> False,
+              Indices -> {Index[Generation],Index[Colour]}, FlavorIndex -> Generation,
+              ClassMembers -> {YS3u1, YS3u2, YS3u3},
+              QuantumNumbers -> {Y->2/3, Q->2/3}, PDG -> {2000002,2000004,2000006},
+              Mass  -> {MYS3u, {MYS3u1, 2000.}, {MYS3u2, 2001.}, {MYS3u3, 2002.}},
+              Width -> {WYS3u, {WYS3u1, 20.  }, {WYS3u2, 21.  }, {WYS3u3, 22.  }},
+              ParticleName -> {"~YS3u1", "~YS3u2", "~YS3u3"},
+              AntiParticleName -> {"~YS3u1~", "~YS3u2~", "~YS3u3~"}
+              }
+};
+
+(* ************************** *)
+(* *****   Parameters   ***** *)
+(* ************************** *)
+M$Parameters = {
+
+ lamS3u == { ParameterType -> External, ComplexParameter -> False,
+            TeX -> Subscript[\[Lambda],u], BlockName -> DMS3U,
+            Indices -> {Index[Generation], Index[Generation]},
+            InteractionOrder -> {DMT,1},
+            Definitions -> {lamS3u[i_?NumericQ, j_?NumericQ] :> 0  /; (i=!=j)},
+            Value -> {lamS3u[1,1] -> 0.13, lamS3u[2,2] -> 0.14, lamS3u[3,3] -> 0.15}}
+};
+
+(* ************************** *)
+(* *****   Lagrangian   ***** *)
+(* ************************** *)
+
+LDMSIMPt := Block[{LKinDM, LKinS3, LIntS3, ii,ff,ffp,cc,mu,nu,sp,sp2},
+  LKinDM :=  \
+    I/2*Xmbar.Ga[mu].DC[Xm,mu] - 1/2 MXm Xmbar.Xm;
+
+  LKinS3 :=  \
+      DC[anti[YS3ubar[ff,cc]],mu] DC[YS3ubar[ff,cc],mu] \
+    - MYS3u[ff]^2  YS3ubar[ff,cc]  YS3u[ff,cc];
+
+  LIntS3 := \
+     lamS3u[ff,ffp] Xmbar[sp].uR[sp,ff,cc] YS3ubar[ffp,cc];
+
+LKinDM + LKinS3 + LIntS3 + HC[LIntS3]];
+
+
+

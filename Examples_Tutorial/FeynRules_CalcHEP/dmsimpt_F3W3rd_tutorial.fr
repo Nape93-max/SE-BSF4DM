@@ -1,0 +1,98 @@
+(* ****************************************************************** *)
+(* *****                                                        ***** *)
+(* *****  FeynRules model file: Simplified DM models            ***** *)
+(* *****                                                        ***** *)
+(* *****  Author: Benjamin Fuks                                 ***** *)
+(* *****                                                        ***** *)
+(* *****  Edited by Martin Napetschnig for SE+BSF4DM Tutorial   ***** *)
+(* *****                                                        ***** *)
+(* *****                                                        ***** *)
+(* ****************************************************************** *)
+
+(* ************************** *)
+(* *****  Information   ***** *)
+(* ************************** *)
+M$ModelName = "DMsimp_t_F3W3rd";
+
+M$Information = { Authors->{"Benjamin Fuks", "Martin Napetschnig"}, Emails->{"fuks@lpthe.jussieu.fr", "martin.napetschnig@tum.de"},
+                  Institutions->{"LPTHE / Sorbonne U.", "Technical University of Munich (TUM)", "JGU Mainz"},
+                  Date->"29.10.19", Version->"1.2",
+                  URLs->"http://feynrules.irmp.ucl.ac.be/wiki/DMsimpt/"};
+
+(* ************************** *)
+(* *****  Change  log   ***** *)
+(* ************************** *)
+
+(* 2019.05.22 v1.0 - First version                       *)
+(* 2019.08.27 v1.1 - Changing a few PDG codes            *)
+(* 2019.10.29 v1.2 - Adding complex scalar and vector DM *)
+
+(* ************************** *)
+(* *** Interaction orders *** *)
+(* ************************** *)
+M$InteractionOrderLimit     = { {DMT, 2} };
+M$InteractionOrderHierarchy = { {QCD, 1}, {DMT, 2}, {QED, 2} };
+
+(* ************************** *)
+(* *****     Fields     ***** *)
+(* ************************** *)
+M$ClassesDescription = {
+  (* Dark matter *)
+  V[101] == { ClassName -> Xw, SelfConjugate -> False,
+              Mass -> {MXw, 15.}, Width -> 0, PDG -> 58,
+              ParticleName -> {"~Xw"},
+              AntiParticleName -> {"~Xw~"}
+              },
+
+  (* Mediators - Modified to only include third generation *)
+  F[200] == { ClassName -> YF3Q, Unphysical -> True, SelfConjugate -> False,
+              Indices -> {Index[SU2D], Index[Colour]}, FlavorIndex -> SU2D,
+              QuantumNumbers -> {Y->1/6},
+              Definitions -> {YF3Q[s_, 1, c_] -> YF3Qu[s, c], YF3Q[s_, 2, c_] -> YF3Qd[s, c]}},
+  
+  F[201] == { ClassName -> YF3Qu, SelfConjugate -> False,
+              Indices -> {Index[Colour]}, 
+              QuantumNumbers -> {Q->2/3}, PDG -> 5910006,
+              Mass  -> {MYF3Qu3, 3002.},
+              Width -> {WYF3Qu3, 32.},
+              ParticleName -> {"~YF3Qu3"},
+              AntiParticleName -> {"~YF3Qu3~"}
+              },
+              
+  F[202] == { ClassName -> YF3Qd, SelfConjugate -> False,
+              Indices -> {Index[Colour]},
+              QuantumNumbers -> {Q->-1/3}, PDG -> 5910005,
+              Mass  -> {MYF3Qd3, 3005.},
+              Width -> {WYF3Qd3, 35.},
+              ParticleName -> {"~YF3Qd3"},
+              AntiParticleName -> {"~YF3Qd3~"}
+              }
+};
+
+(* ************************** *)
+(* *****   Parameters   ***** *)
+(* ************************** *)
+M$Parameters = {
+ lamF3Q == { ParameterType -> External, ComplexParameter -> False,
+            TeX -> Subscript[OverHat[\[Lambda]], Q], BlockName -> DMF3Q,
+            InteractionOrder -> {DMT, 1},
+            Value -> 0.22}
+};
+
+(* ************************** *)
+(* *****   Lagrangian   ***** *)
+(* ************************** *)
+
+LDMSIMPt := Block[{LKinDM, LKinF3, LIntF3, i, c, mu, nu, s, s2},
+  LKinDM := -1/2 FS[Xw, mu, nu] FS[Xwbar, mu, nu] + MXw^2 Xw[mu] Xwbar[mu];
+  
+  LKinF3 := 
+    Plus @@ (I anti[#].Ga[mu].DC[#, mu] & /@ {YF3Q}) -
+    MYF3Qu3 YF3Qubar[s, c].YF3Qu[s, c] - 
+    MYF3Qd3 YF3Qdbar[s, c].YF3Qd[s, c];
+  
+  (* Modified to only couple to third generation *)
+  LIntF3 := lamF3Q YF3Qbar[s, i, c].QL[s2, i, 3, c] Xw[mu] Ga[mu, s, s2];
+  
+  LKinDM + LKinF3 + LIntF3 + HC[LIntF3]
+];

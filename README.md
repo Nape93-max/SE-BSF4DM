@@ -45,14 +45,5 @@ S3Muni
 These examples are provided for reference and are not required to run SE+BSF4DM.
 
 ## ATTRIBUTION
-If you use **SE+BSF4DM** in your work, please cite our paper with the bibtex key:
-@article{Becker:2025vgq,
-    author = "Becker, Mathias and Copello, Emanuele and Napetschnig, Martin",
-    title = "{SE+BSF4DM - A micrOMEGAs package for Sommerfeld Effect and Bound State Formation in colored Dark Sectors}",
-    eprint = "2512.02155",
-    archivePrefix = "arXiv",
-    primaryClass = "hep-ph",
-    reportNumber = "TUM-HEP-1572/25, MITP-25-077",
-    month = "12",
-    year = "2025"
-}
+If you use **SE+BSF4DM** in your work, please cite our paper:
+**M. Becker, E. Copello, M. Napetschnig**, *"SE+BSF4DM - A micrOMEGAs package for Sommerfeld Effect and Bound State Formation in colored Dark Sectors"*, arXiv:2512.02155 [hep-ph] (2025).

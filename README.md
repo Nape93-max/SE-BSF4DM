@@ -45,5 +45,7 @@ S3Muni
 These examples are provided for reference and are not required to run SE+BSF4DM.
 
 ## ATTRIBUTION
-If you use **SE+BSF4DM** in your work, please cite our paper:
-**M. Becker, E. Copello, M. Napetschnig**, *"SE+BSF4DM - A micrOMEGAs package for Sommerfeld Effect and Bound State Formation in colored Dark Sectors"*, arXiv:2512.02155 [hep-ph] (2025).
+If you use **SE+BSF4DM** in your work, please cite our paper: <br>
+**M. Becker, E. Copello, M. Napetschnig**, <br>
+*"SE+BSF4DM - A micrOMEGAs package for Sommerfeld Effect and Bound State Formation in colored Dark Sectors"*, <br>
+arXiv:2512.02155 [hep-ph] (2025).

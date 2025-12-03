@@ -1,7 +1,7 @@
 # SE-BSF4DM
 Sommerfeld Effect and Bound State Formation for Dark Matter
 
-> **Please Note:** This is the official GitHub repository for the tool **SE+BSF4DM** presented in our paper "SE+BSF4DM: A micrOMEGAs package for Sommerfeld Effect and Bound State Formation in colored Dark Sectors". The name was adapted for technical compatibility with GitHub's naming conventions.
+> **Please Note:** This is the official GitHub repository for the tool **SE+BSF4DM** presented in our paper "[SE+BSF4DM: A micrOMEGAs package for Sommerfeld Effect and Bound State Formation in colored Dark Sectors](https://arxiv.org/abs/2512.02155)". The name was adapted for technical compatibility with GitHub's naming conventions.
 
 This package extends micrOMEGAs to calculate dark matter relic density including Sommerfeld enhancement and bound state formation for QCD-colored particles.
 
@@ -43,3 +43,16 @@ F3W3rd
 S3Muni
 
 These examples are provided for reference and are not required to run SE+BSF4DM.
+
+## ATTRIBUTION
+If you use **SE+BSF4DM** in your work, please cite our paper with the bibtex key:
+@article{Becker:2025vgq,
+    author = "Becker, Mathias and Copello, Emanuele and Napetschnig, Martin",
+    title = "{SE+BSF4DM - A micrOMEGAs package for Sommerfeld Effect and Bound State Formation in colored Dark Sectors}",
+    eprint = "2512.02155",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ph",
+    reportNumber = "TUM-HEP-1572/25, MITP-25-077",
+    month = "12",
+    year = "2025"
+}

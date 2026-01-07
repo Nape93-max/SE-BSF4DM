@@ -1,9 +1,9 @@
 # SE-BSF4DM
 Sommerfeld Effect and Bound State Formation for Dark Matter
 
-> **Please Note:** This is the official GitHub repository for the tool **SE+BSF4DM** presented in our paper "[SE+BSF4DM: A micrOMEGAs package for Sommerfeld Effect and Bound State Formation in colored Dark Sectors](https://arxiv.org/abs/2512.02155)". The name was adapted for technical compatibility with GitHub's naming conventions.
+> **Please Note:** This is the official GitHub repository for the tool **SE+BSF4DM** presented in our papers "[Sommerfeld Effect and Bound State Formation for Dark Matter Models with Colored Mediators with SE+BSF4DM](https://arxiv.org/abs/2601.03026)" and "[Manual for SE+BSF4DM - A micrOMEGAs package for Sommerfeld Effect and Bound State Formation in colored Dark Sectors](https://arxiv.org/abs/2512.02155)". The name was adapted for technical compatibility with GitHub's naming conventions.
 
-This package extends micrOMEGAs to calculate dark matter relic density including Sommerfeld enhancement and bound state formation for QCD-colored particles. A short video presentation can be found on [Youtube](https://youtu.be/sPVRzVdR3xs).
+This package extends micrOMEGAs to calculate dark matter relic density including Sommerfeld enhancement and bound state formation for QCD-colored particles.
 
 ## Installation
 Follow these steps to install SE+BSF4DM:
@@ -46,6 +46,10 @@ These examples are provided for reference and are not required to run SE+BSF4DM.
 
 ## ATTRIBUTION
 If you use **SE+BSF4DM** in your work, please cite our paper: <br>
-**M. Becker, E. Copello, M. Napetschnig**, <br>
-*"SE+BSF4DM - A micrOMEGAs package for Sommerfeld Effect and Bound State Formation in colored Dark Sectors"*, <br>
+**M. Becker, E. Copello, J. Harz and M. Napetschnig**, <br>
+*"Sommerfeld Effect and Bound State Formation for Dark Matter Models with Colored Mediators with SE+BSF4DM"*, <br>
+arXiv:2601.03026 [hep-ph] (2026). <br>
+
+**M. Becker, E. Copello, J. Harz and M. Napetschnig**, <br>
+*"Manual for SE+BSF4DM - A micrOMEGAs package for Sommerfeld Effect and Bound State Formation in colored Dark Sectors"*, <br>
 arXiv:2512.02155 [hep-ph] (2025).
